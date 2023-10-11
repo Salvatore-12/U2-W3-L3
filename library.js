@@ -1,3 +1,30 @@
+const renderBooks=function(books){
+books.forEach(book =>{
+const newCol=document.createElement("div")
+newCol.classList.add("col","col-4")
+
+const newCard=document.createElement("div")
+newCard.classList.add("card")
+newCard.innerHTML=`<div class="card" style="width: 18rem;">
+<img src="${book.img}" class="card-img-top" alt="${book.title}">
+<div class="card-body">
+  <h5 class="card-title">${book.title}</h5>
+  <p class="card-text">${book.price}</p>
+  <button class="btn btn-primary" oneclick="deleteMe(event)">Scarta</button>
+</div>
+</div>`
+newCol.appendChild(newCard)
+const row=document.getElementById("bookRow")
+row.appendChild(newCol)
+})
+}
+const deleteMe=function(e){
+console.log(e.target.closest(".col"))
+e.target.closest(".col").remove()
+}
+
+
+
 fetch("https://striveschool-api.herokuapp.com/books")
 .then((res) => {
     if (res.ok) {
@@ -6,50 +33,21 @@ fetch("https://striveschool-api.herokuapp.com/books")
     } 
   })
   .catch((err) => {
-    console.log(err)})
+    console.log("errore",err)})
 .then((booksData)=>{
  console.log("bookData",booksData);
+renderBooks(booksData)
 
-//  IMMAGINE1
-//  sezione per l'immagine
-const currentImg=document.getElementById("image1")
-currentImg.src=booksData[0].img;
-//  sezione per il titolo
-const currentTitle=document.getElementById("titolo1")
-currentTitle.innerText=booksData[0].title
-// sezione per il prezzo
-const currentPrice=document.getElementById("price1")
-currentPrice.innerText=booksData[0].price;
-
-//  sezione per l'immagine
-const currentImg2=document.getElementById("image2")
-currentImg2.src=booksData[1].img;
-//  sezione per il titolo
-const currentTitle2=document.getElementById("titolo2")
-currentTitle2.innerText=booksData[1].title
-// sezione per il prezzo
-const currentPrice2=document.getElementById("price2")
-currentPrice2.innerText=booksData[1].price;
-
-const currentImg3=document.getElementById("image3")
-currentImg3.src=booksData[2].img;
-//  sezione per il titolo
-const currentTitle3=document.getElementById("titolo3")
-currentTitle3.innerText=booksData[2].title
-// sezione per il prezzo
-const currentPrice3=document.getElementById("price3")
-currentPrice3.innerText=booksData[2].price;
-
-const currentImg4=document.getElementById("image4")
-currentImg4.src=booksData[3].img;
-//  sezione per il titolo
-const currentTitle4=document.getElementById("titolo4")
-currentTitle4.innerText=booksData[3].title
-// sezione per il prezzo
-const currentPrice4=document.getElementById("price4")
-currentPrice4.innerText=booksData[3].price;
 
 // booksData.forEach((book) => {
- 
+  // per ogni book
+  // const col=document.createElement("div")
+  // crea una col
+  // col.className="col-md-3 mb-3"
+
+  // crea una card
+
+  // appendi la card alla col
+  // appendi la col alla row
 
 })
